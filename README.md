@@ -7,15 +7,16 @@ QTPrintService.exe - сервис для печати
 
 <table>
 <tr> <td>QTPrintService.py</td><td>исходний код сервиса</td> </tr>
-<tr> <td>\dist\QTPrintService.exe</td><td>собранный сервер</td> </tr>
+<tr> <td>\dist\QTPrintService.exe</td><td>собранный сервис</td> </tr>
 </table>
-**управление:**
-QTPrintService.exe install   - инсталяция сервиса
+<h4>Управление:</h4>
+<pre>QTPrintService.exe install   - инсталяция сервиса
 QTPrintService.exe start     - запуск сервиса
 QTPrintService.exe stop      - остановить сервис
 QTPrintService.exe remove    - удаление сервиса 	
-	
-**Сборка сервиса:**
+</pre>	
+
+<h4>Сборка сервиса:</h4>
 <pre>
 pyinstaller --onefile --icon="app.ico" --hidden-import win32timezone QTPrintService.py
 </pre> 
@@ -68,10 +69,12 @@ BarsPySend({"Print":"< h1>Привет Мир-HelloWorld</h1>"}) // отправ
 </pre>
 
 <h4>Python V3</h4>
-**Для сблрки необходимо использовать сторонние пакеты:**
+<h4>Для сблрки необходимо использовать сторонние пакеты:</h4>
 <pre>
 pip install Flask
 pip install Flask-cors
 pip qt5
 pip install pyinstaller
 </pre> 
+<h5>Python3.8 с установленными пакетами распоковать в C:\Program Files\Python38</h5>
+<pre>https://yadi.sk/d/nYL9MjYO_oMsBA</pre> 
