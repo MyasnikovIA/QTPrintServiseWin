@@ -1,0 +1,7 @@
+/__pycache__
+/build
+/.idea
+/htmlPage/__pycache__
+/lib/__pycache__
+__pycache__
+*.spec
