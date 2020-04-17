@@ -25,7 +25,7 @@ index = """<!DOCTYPE html>
                     itemclick: function (tree, record, item, index, e, options) {
                         var nodeText = record.data.text;
                         selectPrinterName = nodeText
-                        centerPanel.update('<h3>Принтер: ' + nodeText + '</h3>WidthPage<input id="widthPage" type="number" placeholder="" value=300 /><br/>HeightPage<input id="heightPage" type="number" placeholder="" value=100 /> <br/>LocalFile<input id="LocalFile" type="text" placeholder="c:/print/temp/page.pdf" value="" /> <br/><textarea id="contentPrint" rows="4" style="width:100%;"></textarea><br/><button onclick="sendPrint()">Печать</button><br/><pre id="resPrint"></pre>');
+                        centerPanel.update('<h3>Принтер: ' + nodeText + '</h3>WidthPage<input id="widthPage" type="number" placeholder="" value=300 /><br/>HeightPage<input id="heightPage" type="number" placeholder="" value=100 /><br/> LeftPage<input id="leftPage" type="number" placeholder="" value=-15 /><br/>TopPage<input id="topPage" type="number" placeholder="" value=-15 /><br/>   LocalFile<input id="LocalFile" type="text" placeholder="c:/print/temp/page.pdf" value="" /> <br/><textarea id="contentPrint" rows="4" style="width:100%;"></textarea><br/><button onclick="sendPrint()">Печать</button><br/><pre id="resPrint"></pre>');
                     }
                 }
             });
@@ -34,7 +34,6 @@ index = """<!DOCTYPE html>
                 layout: 'fit',
                 items: [
                     {
-
                         layout: 'border',
                         bodyBorder: false,
                         defaults: {
@@ -59,7 +58,6 @@ index = """<!DOCTYPE html>
                                 margins: '5 0 0 0',
                                 id: "bodyPanel",
                             }]
-
                     },
                 ]
             });
@@ -70,7 +68,6 @@ index = """<!DOCTYPE html>
                 region: 'center'
             });
             Ext.getCmp('bodyPanel').add(centerPanel);
-
             var BarsPySend = function (messageObject, FunCallBack) {
                 var host = "http://127.0.0.1:51003/";
                 var cspBindRequestCall = new XMLHttpRequest();
@@ -116,7 +113,9 @@ index = """<!DOCTYPE html>
                         "PrinterName": selectPrinterName,
                         "widthPage":document.getElementById("widthPage").value ,
                         "heightPage":document.getElementById("heightPage").value,
-                        "Filename":document.getElementById("LocalFile").value 
+                        "Filename":document.getElementById("LocalFile").value, 
+                        "Leftpage":document.getElementById("leftPage").value, 
+                        "Toppage":document.getElementById("topPage").value 
                     }, function (dat) {
                         document.getElementById("resPrint").innerHTML = JSON.stringify(dat)
                         console.log("Результат отправки на печать",dat);

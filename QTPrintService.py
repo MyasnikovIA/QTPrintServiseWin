@@ -71,7 +71,7 @@ def get_print_list():
     return requestMessage
 
 
-def html_to_image(StrPrintHtml="", printer_name="", widthPage=300, heightPage=100, filename=""):
+def html_to_image(StrPrintHtml="", printer_name="", widthPage=300, heightPage=100, leftPage=-15, topPage=-15 , filename=""):
     """
     Функция вывода текста на принтер
     :param StrPrintHtml: - Текст HTML
@@ -81,6 +81,8 @@ def html_to_image(StrPrintHtml="", printer_name="", widthPage=300, heightPage=10
     requestMessage = {}
     requestMessage["WidthPage"] = widthPage
     requestMessage["HeightPage"] = heightPage
+    requestMessage["LeftPage"] = leftPage
+    requestMessage["TopPage"] = topPage
     requestMessage["filename"] = filename
     requestMessage["status"] = 0
     try:
@@ -101,7 +103,7 @@ def html_to_image(StrPrintHtml="", printer_name="", widthPage=300, heightPage=10
         printer.setPageMargins(0, 0, 0, 0, QPrinter.DevicePixel)
         painter = QPainter()
         painter.begin(printer)
-        painter.drawPixmap(-15, -15, label.grab())
+        painter.drawPixmap(int(leftPage),int(topPage), label.grab())
         painter.end()
     except Exception:
         requestMessage["Error"] = "%s" % (format_exc())
@@ -120,6 +122,8 @@ def requestFun():
     printer_name = ""
     widthPage = 300
     heightPage = 100
+    leftPage = -15
+    topPage = -15
     filename=""
     if request.host[:9] != "127.0.0.1":
         if request.host[:9] != "localhost":
@@ -131,10 +135,14 @@ def requestFun():
         widthPage = requestMessage.get("Widthpage")
     if "Heightpage" in requestMessage:
         heightPage = requestMessage.get("Heightpage")
+    if "Leftpage" in requestMessage:
+        leftPage = requestMessage.get("Leftpage")
+    if "Toppage" in requestMessage:
+        topPage = requestMessage.get("Toppage")
     if "Printername" in requestMessage:
         printer_name = requestMessage.get("Printername")
     if "Print" in requestMessage:
-        res = html_to_image(requestMessage["Print"], printer_name, widthPage, heightPage, filename)
+        res = html_to_image(requestMessage["Print"], printer_name, widthPage, heightPage,leftPage,topPage, filename)
         return dumps(res), 200, {'content-type': 'application/json'}
     if "Getprinterlist" in requestMessage:
         return dumps(get_print_list()), 200, {'content-type': 'application/json'}
